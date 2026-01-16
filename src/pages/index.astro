@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css'
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/header.astro'
+import Footer from '../components/footer.astro'
 ---
 
 <html lang="en">
@@ -10,6 +13,10 @@ import '../styles/global.css'
 		<title>Document</title>
 	</head>
 	<body>
+		<header>
+			<Header />
+		</header>
 		<h1>Hello, Astro!</h1>
+		<p>Welcome to your new project.</p>
 	</body>
 </html>
