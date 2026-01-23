@@ -1,4 +1,5 @@
 ---
+import OffreCard from '../components/OffreCard.astro';
 import Layout from '../layouts/Layout.astro'
 import '../styles/global.css'
 
@@ -41,10 +42,45 @@ const offres = [
 <Layout titre="Offres">
     <h1>offres</h1>
     <br>
-    <div>
-        { offres.map((offre) => 
-            <ul>{offre.nomMaison}</ul>
-            )
+    
+<button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2">Afficher les favoris</button>
+        <div>
+        {
+                offres.map(offre => (
+                <div class="offre" data-favori={offre.favori.toString()}>
+                        <!-- Contenu de l'offre -->
+                </div>
+                ))
         }
-    </div>
+
+</div>
+        <script>
+    const button = document.getElementById('favori-button');
+    let showOnlyFavorites = false;
+    
+    button?.addEventListener('click', () => {
+        showOnlyFavorites = !showOnlyFavorites;
+        const offres = document.querySelectorAll('.offre');
+        
+        offres.forEach(offre => {
+            const isFavori = offre.dataset.favori === 'true';
+            
+            if (showOnlyFavorites) {
+                offre.style.display = isFavori ? 'block' : 'none';
+                button.textContent = 'Afficher tout';
+            } else {
+                offre.style.display = 'block';
+                button.textContent = 'Afficher les favoris';
+            }
+        });
+    });
+</script>
+
+    <br>
+
+    <OffreCard nomMaison={offres[0].nomMaison}></OffreCard>
+    <OffreCard nomMaison={offres[1].nomMaison}></OffreCard>
+    <OffreCard nomMaison={offres[2].nomMaison}></OffreCard>
+
+
 </Layout>
