@@ -1,7 +1,6 @@
 ---
-import OffreCard from '.././components/OffreCard.astro';
-import Layout from '.././layouts/Layout.astro'
-import '../styles/global.css'
+import OffreCard from '../../components/OffreCard.astro';
+import Layout from '../../layouts/Layout.astro'
 
 const offres = [
   {
@@ -54,7 +53,20 @@ const offres = [
         }
 
 </div>
-        <script>
+
+
+    <br>
+
+    <OffreCard nomMaison={offres[0].nomMaison}></OffreCard>
+    <OffreCard nomMaison={offres[1].nomMaison}></OffreCard>
+    <OffreCard nomMaison={offres[2].nomMaison}></OffreCard>
+
+
+</Layout>
+
+
+<script>
+    //@ts-nocheck
     const button = document.getElementById('favori-button');
     let showOnlyFavorites = false;
     
@@ -75,12 +87,3 @@ const offres = [
         });
     });
 </script>
-
-    <br>
-
-    <OffreCard nomMaison={offres[0].nomMaison}></OffreCard>
-    <OffreCard nomMaison={offres[1].nomMaison}></OffreCard>
-    <OffreCard nomMaison={offres[2].nomMaison}></OffreCard>
-
-
-</Layout>
