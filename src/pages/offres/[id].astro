@@ -1,0 +1,17 @@
+---
+import { getOffre } from '../../../backend.mjs';
+import Card from '../../components/OffreCard.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const { id } = Astro.params;
+const offre = await getOffre(id);
+---
+
+<Layout titre={offre.NomMaison}>
+    <h2>{offre.NomMaison}</h2>
+    <ul>
+        <li>{offre.adresse}</li>
+        ...
+    </ul>
+    <Card offre={offre} />
+</Layout>

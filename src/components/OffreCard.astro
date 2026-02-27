@@ -1,7 +1,15 @@
 ---
-const {nomMaison} = Astro.props;
+import  PbImage from './Pbimage.astro';
+const {offre} = Astro.props;
 ---
 
 <div>
-    <a>{nomMaison}</a>
+      <PbImage
+    record={offre}
+    recordImage={offre.images[0]}
+    width={400}
+    height={300}
+    />
+    <a href={`/offres/${offre.id}`}>{offre.NomMaison}</a>
+
 </div>
