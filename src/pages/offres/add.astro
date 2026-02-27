@@ -1,9 +1,12 @@
 ---
+import { addOffre } from '../../../backend.mjs';
 let message = '';
+let isSuccess = false;
 if (Astro.request.method === "POST") {
     const formData = await Astro.request.formData();
     const response = await addOffre(formData);
     message = response.message;
+    isSuccess = response.success;
 }
 ---
 <h1 class="text-lg">Ajouter une offre</h1>
