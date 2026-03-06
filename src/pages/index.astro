@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import Layout from '../layouts/Layout.astro'
+import { getAgent } from '../../backend.mjs';
 ---
 
 <Layout titre="Home Page">
@@ -10,3 +11,6 @@ import Layout from '../layouts/Layout.astro'
 </Layout>
 	
 <a href="/offres/add.astro">Ajouter une offre</a>
+<br>
+<a href="/agents/add.astro">Ajouter un agent</a>
+<a href="../../src/pages/agents">Voir les agents</a>

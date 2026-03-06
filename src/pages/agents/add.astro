@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/global.css";
+import { addAgent } from "../../../backend.mjs";
+
+let message = "";
+if (Astro.request.method === "POST") {
+    const formData = await Astro.request.formData();
+    const response = await addAgent(formData);
+    if (response.success) {
+        return Astro.redirect("/agents/add?success=1");
+    }
+    message = response.message;
+}
+const success = Astro.url.searchParams.get("success") === "1";
+---
+
+<Layout title="Ajouter un agent">
+    <a href="/agents" class="inline-block mb-4 text-slate-600 hover:underline"
+        >← Retour aux agents</a
+    >
+    <h1 class="text-lg">Ajouter un agent</h1>
+    {success && <p class="my-2 text-green-600">Agent ajouté avec succès !</p>}
+    {message && <p class="my-2 text-red-600">{message}</p>}
+    <form
+        action="/agents/add"
+        method="POST"
+        class="flex flex-col gap-2 max-w-md"
+    >
+        <input
+            type="text"
+            name="nomAgent"
+            placeholder="Nom de l'agent"
+            required
+            class="w-full mt-2 p-2 border border-gray-300 rounded-md"
+        />
+        <input
+            type="text"
+            name="prenomAgent"
+            placeholder="Prénom de l'agent"
+            required
+            class="w-full mt-2 p-2 border border-gray-300 rounded-md"
+        />
+        <input
+            type="email"
+            name="emailAgent"
+            placeholder="Email de l'agent"
+            required
+            class="w-full mt-2 p-2 border border-gray-300 rounded-md"
+        />
+        <button
+            type="submit"
+            class="bg-slate-600 text-white rounded-lg p-2 mt-2">Ajouter</button
+        >
+    </form>
+</Layout>

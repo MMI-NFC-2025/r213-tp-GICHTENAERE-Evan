@@ -1,0 +1,112 @@
+---
+import type { RecordModel } from "pocketbase";
+
+interface Props {
+    record: RecordModel;
+}
+
+const { record } = Astro.props;
+const { id, nomAgent, prenomAgent, emailAgent } = record;
+---
+
+<div class={`offre-card`} data-id={id}>
+    <h2>{nomAgent} {prenomAgent}</h2>
+    <p class="email">{emailAgent}</p>
+    <a href={`/agents/${id}`} class="voir-plus-btn">Voir plus</a>
+</div>
+
+<style>
+    .offre-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+
+    .offre-card.favori {
+        background: #fffbeb;
+        border-color: #fbbf24;
+    }
+
+    .offre-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    .image-container :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .offre-card h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .email {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .adresse {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+    }
+
+    .prix {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #2563eb;
+        margin: 0.5rem 0;
+    }
+
+    .details {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .favori-btn {
+        width: 100%;
+        background: #fbbf24;
+        color: #92400e;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: auto;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .favori-btn:hover {
+        background: #f59e0b;
+    }
+
+    .favori-btn[data-favori="false"] {
+        background: #e5e7eb;
+        color: #6b7280;
+    }
+
+    .favori-btn[data-favori="false"]:hover {
+        background: #d1d5db;
+    }
+</style>

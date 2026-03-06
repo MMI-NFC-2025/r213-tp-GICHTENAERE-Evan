@@ -14,5 +14,29 @@ const { offre } = Astro.props;
   />
 
   <h3>{offre.nomMaison}</h3>
+  <button class="btn">Favori</button>
+  <img id="favorite-icon" src={offre.isFavorite ? "favorite_filled.png" : "favorite.png"} />
 
 </div>
+
+<script>
+    //@ts-nocheck
+    import { setFavori } from "../../backend.js";
+    const favoriteButtons = document.querySelectorAll("???");
+
+    ???.forEach(button => {
+        button.addEventListener('click', () => {
+            const offreData = JSON.parse(button.dataset.offre || '{}');
+            const newFavori = !offreData.favori;
+
+            setFavori(offreData);
+
+            const favIcon = button.querySelector('#???');
+            if (favIcon) {
+                favIcon.src = ??? ? "/favorite_filled.png" : "/favorite.png";
+            }
+            offreData.favori = newFavori;
+            button.dataset.offre = JSON.stringify(offreData);
+        });
+    });
+</script>

@@ -1,0 +1,45 @@
+---
+import { getAgent, getOffresByAgent, setFavori } from "../../../backend.mjs";
+import Layout from "../../layouts/Layout.astro";
+import OffreCard from "../../components/OffreCard.astro";
+import "../../../styles/global.css";
+
+const { id } = Astro.params;
+const agent = await getAgent(id);
+---
+
+<Layout title={`Offres de ${agent?.nomAgent} ${agent?.prenomAgent}`}>
+    <a
+        href={`/agents/${id}`}
+        class="inline-block mb-4 text-slate-600 hover:underline"
+        >← Retour à l'agent</a
+    >
+    <h1 class="text-2xl font-bold mb-4">
+        Offres de {agent?.nomAgent}
+        {agent?.prenomAgent}
+    </h1>
+
+    {
+        offres.length === 0 ? (
+            <p class="text-gray-500">Cet agent n'a aucune offre.</p>
+        ) : (
+            <div class="offres-container">
+                {offres.map((offres) => (
+                    <div class="offre">
+                        <OffreCard record={offres} />
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+</Layout>
+
+<style>
+    .offres-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+</style>
